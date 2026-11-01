@@ -1,241 +1,465 @@
 <!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <meta name="description" content="Welcome to my personal portfolio website.">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }    body {
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Jay | Aspiring Developer</title>
+
+<meta name="description"
+      content="Explore Jay's portfolio, projects, and journey into technology.">
+
+<style>
+    :root {
+        --primary: #2563eb;
+        --primary-light: #eff6ff;
+        --text: #172033;
+        --muted: #64748b;
+        --background: #ffffff;
+        --border: #e2e8f0;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
         font-family: Arial, sans-serif;
-        background: #ffffff;
-        color: #222222;
+        background: var(--background);
+        color: var(--text);
         line-height: 1.7;
     }
 
+    a {
+        color: inherit;
+    }
+
+    .container {
+        width: min(100% - 40px, 1000px);
+        margin: 0 auto;
+    }
+
     header {
+        background: rgba(255, 255, 255, 0.96);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .navbar {
+        min-height: 72px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px 8%;
-        border-bottom: 1px solid #eeeeee;
+        gap: 20px;
     }
 
     .logo {
-        font-size: 20px;
-        font-weight: bold;
+        font-size: 23px;
+        font-weight: 800;
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 22px;
     }
 
     nav a {
-        color: #555555;
-        text-decoration: none;
-        margin-left: 18px;
         font-size: 14px;
+        text-decoration: none;
+        color: var(--muted);
+        transition: color 0.2s ease;
     }
 
     nav a:hover {
-        color: #000000;
+        color: var(--primary);
     }
 
     .hero {
-        max-width: 850px;
-        margin: 100px auto;
-        padding: 0 24px;
+        padding: 110px 0 90px;
         text-align: center;
+        animation: fadeIn 0.8s ease both;
     }
 
-    .hero p {
-        color: #666666;
-    }
-
-    .tag {
+    .badge {
         display: inline-block;
-        padding: 5px 12px;
-        margin-bottom: 20px;
-        border-radius: 20px;
-        background: #f1f1f1;
+        background: var(--primary-light);
+        color: var(--primary);
+        padding: 7px 15px;
+        border-radius: 30px;
         font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 24px;
     }
 
     h1 {
-        font-size: clamp(36px, 8vw, 60px);
-        line-height: 1.15;
-        margin-bottom: 20px;
+        font-size: clamp(42px, 8vw, 72px);
+        line-height: 1.1;
+        letter-spacing: -2px;
+        margin-bottom: 24px;
     }
 
-    .hero-description {
-        max-width: 550px;
-        margin: 0 auto 28px;
+    .highlight {
+        color: var(--primary);
+    }
+
+    .hero p {
+        color: var(--muted);
+        max-width: 580px;
+        margin: 0 auto;
+        font-size: 17px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
     }
 
     .button {
         display: inline-block;
-        background: #222222;
-        color: white;
         padding: 12px 22px;
         border-radius: 8px;
         text-decoration: none;
+        font-weight: 600;
+        transition: transform 0.2s ease,
+                    background 0.2s ease;
+    }
+
+    .button:hover {
+        transform: translateY(-3px);
+    }
+
+    .button-primary {
+        background: var(--primary);
+        color: white;
+    }
+
+    .button-primary:hover {
+        background: #1d4ed8;
+    }
+
+    .button-secondary {
+        border: 1px solid var(--border);
+        background: white;
     }
 
     section {
-        max-width: 850px;
-        margin: 0 auto;
-        padding: 55px 24px;
-        scroll-margin-top: 20px;
+        padding: 70px 0;
+        scroll-margin-top: 70px;
     }
 
-    h2 {
-        font-size: 28px;
-        margin-bottom: 18px;
+    .section-heading {
+        margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+        font-size: 32px;
+        letter-spacing: -1px;
+    }
+
+    .section-heading p {
+        color: var(--muted);
+        margin-top: 6px;
+    }
+
+    .about-card {
+        padding: 28px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: #fff;
+    }
+
+    .about-card p {
+        color: var(--muted);
     }
 
     .skills {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
-        margin-top: 18px;
+        margin-top: 22px;
     }
 
     .skill {
-        padding: 8px 14px;
-        background: #f3f3f3;
-        border-radius: 6px;
-        font-size: 14px;
+        background: var(--primary-light);
+        color: #1d4ed8;
+        border-radius: 7px;
+        padding: 7px 12px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .project-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
     }
 
     .project-card {
-        padding: 22px;
-        border: 1px solid #eeeeee;
-        border-radius: 10px;
-        margin-top: 18px;
+        padding: 25px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        transition: transform 0.25s ease,
+                    box-shadow 0.25s ease;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(37, 99, 235, 0.09);
+    }
+
+    .project-number {
+        color: var(--primary);
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .project-card h3 {
+        margin: 12px 0 8px;
+        font-size: 20px;
     }
 
     .project-card p {
-        color: #666666;
-        margin-top: 8px;
+        color: var(--muted);
+        font-size: 14px;
     }
 
-    .contact-link {
-        color: #222222;
+    .project-link {
+        display: inline-block;
+        margin-top: 18px;
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .contact-card {
+        background: var(--primary-light);
+        border-radius: 16px;
+        padding: 40px 25px;
+        text-align: center;
+    }
+
+    .contact-card p {
+        color: var(--muted);
+        margin: 12px auto 24px;
+        max-width: 500px;
     }
 
     footer {
+        border-top: 1px solid var(--border);
+        padding: 25px 0;
         text-align: center;
-        padding: 25px;
-        margin-top: 40px;
-        border-top: 1px solid #eeeeee;
-        color: #777777;
+        color: var(--muted);
         font-size: 13px;
     }
 
-    @media (max-width: 480px) {
-        header {
-            padding: 18px 5%;
-            flex-direction: column;
-            gap: 10px;
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
         }
 
-        nav a {
-            margin: 0 7px;
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .navbar {
+            flex-direction: column;
+            justify-content: center;
+            padding: 15px 0;
+        }
+
+        nav {
+            justify-content: center;
+            gap: 16px;
         }
 
         .hero {
-            margin: 70px auto;
+            padding: 75px 0 60px;
+        }
+
+        h1 {
+            letter-spacing: -1px;
         }
 
         section {
-            padding: 40px 22px;
+            padding: 50px 0;
+        }
+
+        .project-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .about-card {
+            padding: 22px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            scroll-behavior: auto !important;
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
         }
     }
 </style>
 
-</head>
-<body><header>
-    <div class="logo">MyPortfolio.</div>
+</head><body><header>
+    <div class="container navbar">
+        <a class="logo" href="#home">Jay.</a>
 
-    <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
+        <nav aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
 </header>
 
 <main>
-    <div class="hero">
-        <span class="tag">Welcome to my portfolio</span>
+    <section class="hero container" id="home">
+        <span class="badge">Aspiring Developer</span>
 
-        <h1>Hello, I'm a Future Developer.</h1>
-
-        <p class="hero-description">
-            I'm learning programming and building projects
-            to turn my ideas into reality.
-        </p>
-
-        <a href="#projects" class="button">Explore My Projects</a>
-    </div>
-
-    <section id="about">
-        <h2>About Me</h2>
+        <h1>
+            Hi, I'm Jay.<br>
+            <span class="highlight">I love exploring tech.</span>
+        </h1>
 
         <p>
-            I'm a student interested in technology,
-            programming, and web development.
-            I'm currently learning how to build websites
-            and create useful applications.
+            I'm a student exploring programming, software,
+            and web development. I'm learning by building
+            projects and turning ideas into reality.
         </p>
 
-        <div class="skills">
-            <span class="skill">HTML</span>
-            <span class="skill">CSS</span>
-            <span class="skill">JavaScript</span>
-            <span class="skill">GitHub</span>
+        <div class="buttons">
+            <a class="button button-primary" href="#projects">
+                Explore My Work
+            </a>
+
+            <a class="button button-secondary"
+               href="#about">
+                About Me
+            </a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-heading">
+                <h2>About Me</h2>
+                <p>A little about who I am and what I enjoy.</p>
+            </div>
+
+            <div class="about-card">
+                <p>
+                    I'm Jay, a student interested in technology
+                    and programming. I'm currently exploring
+                    different areas of development, learning new
+                    skills, and building my first projects.
+                    My goal is to keep improving and create
+                    useful things with technology.
+                </p>
+
+                <div class="skills">
+                    <span class="skill">HTML</span>
+                    <span class="skill">CSS</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">GitHub</span>
+                    <span class="skill">Learning Every Day</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="projects">
-        <h2>My Projects</h2>
+        <div class="container">
+            <div class="section-heading">
+                <h2>Featured Projects</h2>
+                <p>Things I've built and ideas I'm exploring.</p>
+            </div>
 
-        <div class="project-card">
-            <h3>Personal Portfolio</h3>
-            <p>
-                My first website, built with HTML and CSS
-                to introduce myself and showcase my work.
-            </p>
-        </div>
+            <div class="project-grid">
+                <article class="project-card">
+                    <span class="project-number">PROJECT 01</span>
 
-        <div class="project-card">
-            <h3>Future Project</h3>
-            <p>
-                A space for my next programming project.
-                More projects coming soon!
-            </p>
+                    <h3>Personal Portfolio</h3>
+
+                    <p>
+                        A responsive personal website built with
+                        HTML and CSS to introduce myself and
+                        showcase my learning journey.
+                    </p>
+
+                    <a class="project-link"
+                       href="https://github.com"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Explore GitHub &rarr;
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <span class="project-number">PROJECT 02</span>
+
+                    <h3>Future Project</h3>
+
+                    <p>
+                        I'm exploring new ideas and learning
+                        technologies to create my next project.
+                        Stay tuned for updates.
+                    </p>
+
+                    <a class="project-link" href="#contact">
+                        Get in touch &rarr;
+                    </a>
+                </article>
+            </div>
         </div>
     </section>
 
     <section id="contact">
-        <h2>Contact</h2>
+        <div class="container">
+            <div class="contact-card">
+                <h2>Let's Connect</h2>
 
-        <p>
-            Interested in my work? You can find my
-            projects on my GitHub profile.
-        </p>
+                <p>
+                    I'm always learning and exploring new ideas.
+                    Check out my GitHub profile to follow my
+                    journey and see what I build next.
+                </p>
 
-        <p style="margin-top: 15px;">
-            <a class="contact-link"
-               href="https://github.com"
-               target="_blank"
-               rel="noopener noreferrer">
-                Visit GitHub →
-            </a>
-        </p>
+                <a class="button button-primary"
+                   href="https://github.com"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Visit GitHub
+                </a>
+            </div>
+        </div>
     </section>
 </main>
 
 <footer>
-    <p>© 2026 My Portfolio. Built with HTML and CSS.</p>
+    <div class="container">
+        <p>&copy; 2026 Jay. Built with HTML and CSS.</p>
+    </div>
 </footer>
 
 </body>
